@@ -7,5 +7,5 @@ import org.springframework.stereotype.Service;
  */
 
 @Service
-public class UploadFileService {
+public class CsvFileService {
 }

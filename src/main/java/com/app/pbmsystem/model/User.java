@@ -1,6 +1,7 @@
 package com.app.pbmsystem.model;
 
 import com.app.pbmsystem.model.enums.Role;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -8,10 +9,13 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "usr")
+@Data
 @NoArgsConstructor
 public class User {
 
@@ -31,11 +35,11 @@ public class User {
     private String lastName;
 
     @NotNull
-    @Size(max = 32)
     @Enumerated(EnumType.STRING)
     @Column(name = "role")
     private Role role;
 
     @OneToMany(mappedBy = "offerer", fetch = FetchType.LAZY)
     private List<Offer> offers = new ArrayList<>(); //TODO maybe set?
+
 }
