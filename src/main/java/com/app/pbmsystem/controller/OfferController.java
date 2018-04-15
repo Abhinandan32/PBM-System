@@ -36,8 +36,8 @@ public class OfferController {
     }
 
     @RequestMapping(value = "/newOffer", method = RequestMethod.POST)
-    public ResponseEntity<Offer> addOffer(@RequestBody Offer offer){
+    public ResponseEntity addOffer(@RequestBody Offer offer){
         offerService.addOffer(offer);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity(HttpStatus.OK);
     }
 }
