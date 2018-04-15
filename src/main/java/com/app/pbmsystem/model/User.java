@@ -40,7 +40,6 @@ public class User {
     @Column(name = "role")
     private Role role;
 
-    @OneToMany(mappedBy = "offerer", fetch = FetchType.LAZY)
-    private List<Offer> offers = new ArrayList<>(); //TODO maybe set?
-
+//    @OneToMany(mappedBy = "offerer", fetch = FetchType.LAZY)
+//    private List<Offer> offers = new ArrayList<>(); //TODO maybe set?
 }
