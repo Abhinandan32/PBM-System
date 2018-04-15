@@ -3,6 +3,7 @@ package com.app.pbmsystem.model;
 import com.app.pbmsystem.model.enums.Role;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;

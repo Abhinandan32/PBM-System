@@ -4,6 +4,7 @@ import com.app.pbmsystem.model.User;
 import com.app.pbmsystem.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +18,7 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Transactional
     public List<User> getAllUsers() {
         List<User> users = new ArrayList<>();
         users.addAll(userRepository.findAll());
@@ -32,7 +34,7 @@ public class UserService {
     }
 
     public User getUser(long id){
-        return userRepository.getById(id);
+        return userRepository.findOneById(id);
     }
 
     public void deleteUser(long id){

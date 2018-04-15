@@ -1,5 +1,8 @@
 package com.app.pbmsystem.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -11,6 +14,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "offer")
+@Data
 @NoArgsConstructor
 public class Offer {
 
@@ -26,4 +30,5 @@ public class Offer {
 
     @ManyToMany(mappedBy = "offers", fetch = FetchType.EAGER)
     private List<ControlCabinet> controlCabinets = new ArrayList<>(); //TODO maybe set?
+
 }

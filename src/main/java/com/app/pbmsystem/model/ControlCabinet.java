@@ -1,5 +1,6 @@
 package com.app.pbmsystem.model;
 
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -11,6 +12,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "control_cabinet")
+@Data
 @NoArgsConstructor
 public class ControlCabinet {
 
@@ -76,4 +78,5 @@ public class ControlCabinet {
             joinColumns = @JoinColumn(name = "offer_id"),
             inverseJoinColumns = @JoinColumn(name = "control_cabinet_id"))
     private List<Offer> offers = new ArrayList<>(); //TODO maybe set?
+
 }
