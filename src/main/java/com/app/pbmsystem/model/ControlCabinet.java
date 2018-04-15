@@ -1,5 +1,6 @@
 package com.app.pbmsystem.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -77,6 +78,7 @@ public class ControlCabinet {
     @JoinTable(name = "offer_control_cabinet",
             joinColumns = @JoinColumn(name = "offer_id"),
             inverseJoinColumns = @JoinColumn(name = "control_cabinet_id"))
+    @JsonManagedReference
     private List<Offer> offers = new ArrayList<>(); //TODO maybe set?
 
 }

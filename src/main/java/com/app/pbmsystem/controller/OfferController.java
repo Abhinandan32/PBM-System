@@ -5,6 +5,7 @@ import com.app.pbmsystem.service.OfferService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,5 +35,9 @@ public class OfferController {
         return new ResponseEntity<>(offers, HttpStatus.OK);
     }
 
-
+    @RequestMapping(value = "/newOffer", method = RequestMethod.POST)
+    public ResponseEntity<Offer> addOffer(@RequestBody Offer offer){
+        offerService.addOffer(offer);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }
