@@ -1,17 +1,17 @@
 package com.app.pbmsystem.controller;
 
 import com.app.pbmsystem.service.CsvFileService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.awt.*;
+import java.util.logging.LogManager;
+
 
 /**
  * Created by dawidbranicki on 13.04.2018.
@@ -20,6 +20,7 @@ import java.awt.*;
 @RestController
 public class CsvFileController {
 
+    Logger logger = LoggerFactory.getLogger(this.getClass().getName());
     private CsvFileService csvFileService;
 
     @Autowired
@@ -27,8 +28,9 @@ public class CsvFileController {
         this.csvFileService = csvFileService;
     }
 
-    @RequestMapping(value = "/upload", method = RequestMethod.POST)
-    public ResponseEntity<?> loadFile(@RequestParam("file") MultipartFile file) {
+    @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
+    public ResponseEntity loadFile(@RequestParam("file") MultipartFile file) {
+        logger.debug("Dodano plik");
         String msg;
         try {
             csvFileService.store(file);

@@ -2,7 +2,6 @@ package com.app.pbmsystem.controller;
 
 import com.app.pbmsystem.model.Offer;
 import com.app.pbmsystem.service.OfferService;
-import com.app.pbmsystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
