@@ -15,14 +15,14 @@ import java.util.Optional;
  * Created by dawidbranicki on 15.04.2018.
  */
 @Service
-public class OfferService {
+public class ProjectService {
 
     private OfferRepository offerRepository;
 
     private UserRepository userRepository;
 
     @Autowired
-    public OfferService(OfferRepository offerRepository, UserRepository userRepository) {
+    public ProjectService(OfferRepository offerRepository, UserRepository userRepository) {
         this.offerRepository = offerRepository;
         this.userRepository = userRepository;
     }

@@ -1,5 +1,6 @@
 package com.app.pbmsystem.model;
 
+import com.opencsv.bean.CsvBindByName;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -18,46 +19,55 @@ public class ControlCabinet {
     private Long id;
 
     @NotNull
+    @CsvBindByName(column = "TIME")
     @Column(name = "real_time")
     private Long realTime;
 
-    @NotNull
+//    @NotNull
     @Column(name = "esitmated_time")
     private Long estimatedTime;
 
-    @NotNull
+//    @NotNull
     @Column(name = "valuation_cost")
     private Long valuationCost;
 
     @NotNull
+    @CsvBindByName(column = "PRICE")
     @Column(name = "adjusted_cost")
     private Long adjustedCost;
 
     @NotNull
+    @CsvBindByName(column = "CURRENT")
     @Column(name = "current")
     private Long current;
 
     @NotNull
-    @Column(name = "device_amount")
-    private Long deviceAmount;
-
-    @NotNull
+    @CsvBindByName(column = "PLC_IN")
     @Column(name = "plc_input")
     private Long plcInput;
 
     @NotNull
+    @CsvBindByName(column = "PLC_OUT")
     @Column(name = "plc_output")
     private Long plcOutput;
 
     @NotNull
+    @CsvBindByName(column = "MOTORS")
     @Column(name = "drive_amount")
     private Long driveAmount;
 
     @NotNull
+    @CsvBindByName(column = "SAFETY")
+    @Column(name = "safety")
+    private Long safety;
+
+    @NotNull
+    @CsvBindByName(column = "Protection")
     @Column(name = "protection_amount")
     private Long protectionAmount;
 
     @NotNull
+    @CsvBindByName(column = "Contactors")
     @Column(name = "contactors_amount")
     private Long contactorsAmount;
 
@@ -73,12 +83,14 @@ public class ControlCabinet {
     @Column(name = "to_valuation")
     private boolean toValuation;
 
-    @NotNull
+//    @NotNull
+//    @CsvBindByName(column = "Offerent")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "offerer_id")
     private User offerer;
 
-    @NotNull
+//    @NotNull
+//    @CsvBindByName(column = "Project")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "project_id")
     private Project project;
