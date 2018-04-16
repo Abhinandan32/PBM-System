@@ -23,11 +23,11 @@ public class ControlCabinet {
     @Column(name = "real_time")
     private Long realTime;
 
-//    @NotNull
+    //    @NotNull
     @Column(name = "esitmated_time")
     private Long estimatedTime;
 
-//    @NotNull
+    //    @NotNull
     @Column(name = "valuation_cost")
     private Long valuationCost;
 
@@ -83,14 +83,14 @@ public class ControlCabinet {
     @Column(name = "to_valuation")
     private boolean toValuation;
 
-//    @NotNull
-//    @CsvBindByName(column = "Offerent")
+    //    @NotNull
+//    @CsvBindByName(column = "Offerent") //TODO I don't know why it doesn't work, some problem with relation betwean tables
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "offerer_id")
     private User offerer;
 
-//    @NotNull
-//    @CsvBindByName(column = "Project")
+    //    @NotNull
+//    @CsvBindByName(column = "Project") //TODO I don't know why it doesn't work, some problem with relation betwean tables
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "project_id")
     private Project project;

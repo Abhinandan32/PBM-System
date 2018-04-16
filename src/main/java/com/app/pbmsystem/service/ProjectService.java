@@ -3,7 +3,7 @@ package com.app.pbmsystem.service;
 import com.app.pbmsystem.model.Project;
 import com.app.pbmsystem.repository.OfferRepository;
 
-import com.app.pbmsystem.repository.UserRepository;
+import com.app.pbmsystem.repository.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,12 +19,12 @@ public class ProjectService {
 
     private OfferRepository offerRepository;
 
-    private UserRepository userRepository;
+    private ProjectRepository projectRepository;
 
     @Autowired
-    public ProjectService(OfferRepository offerRepository, UserRepository userRepository) {
+    public ProjectService(OfferRepository offerRepository, ProjectRepository projectRepository) {
         this.offerRepository = offerRepository;
-        this.userRepository = userRepository;
+        this.projectRepository = projectRepository;
     }
 
     public List<Project> offerList(){
@@ -33,8 +33,9 @@ public class ProjectService {
         return projects;
     }
 
+    //TODO
 //    public void addOffer(Project project){
-//        project.setOfferer(userRepository.findOneById(project.getId()));
+//        project.setOfferer(projectRepository.findOneById(project.getId()));
 //        offerRepository.save(project);
 //    }
 

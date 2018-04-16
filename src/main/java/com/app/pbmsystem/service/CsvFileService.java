@@ -32,6 +32,12 @@ public class CsvFileService {
                     .withSeparator(';')
                     .build();
             List<ControlCabinet> controlCabinets = cabinetCsvToBean.parse();
+            controlCabinets.forEach(c -> {
+                c.setArchive(true);
+                c.setToValuation(false);
+                c.setNotUsedInModel(true);
+            });
+
             controlCabinetRepository.saveAll(controlCabinets);
 
         }
