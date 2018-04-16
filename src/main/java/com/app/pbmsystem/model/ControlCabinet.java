@@ -5,10 +5,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "control_cabinet")
@@ -38,16 +34,8 @@ public class ControlCabinet {
     private Long adjustedCost;
 
     @NotNull
-    @Column(name = "x_dimension")
-    private Long xDimension;
-
-    @NotNull
-    @Column(name = "y_dimension")
-    private Long yDimension;
-
-    @NotNull
-    @Column(name = "amperes")
-    private Long amperes;
+    @Column(name = "current")
+    private Long current;
 
     @NotNull
     @Column(name = "device_amount")
@@ -66,17 +54,32 @@ public class ControlCabinet {
     private Long driveAmount;
 
     @NotNull
-    @Column(name = "inventer_amount")
-    private Long inverterAmount;
+    @Column(name = "protection_amount")
+    private Long protectionAmount;
 
     @NotNull
-    @Column(name = "safety")
-    private boolean safety;
+    @Column(name = "contactors_amount")
+    private Long contactorsAmount;
 
-    @ManyToMany(cascade = {CascadeType.REFRESH, CascadeType.DETACH}, fetch = FetchType.LAZY)
-    @JoinTable(name = "offer_control_cabinet",
-            joinColumns = @JoinColumn(name = "offer_id"),
-            inverseJoinColumns = @JoinColumn(name = "control_cabinet_id"))
-    private List<Offer> offers = new ArrayList<>(); //TODO maybe set?
+    @NotNull
+    @Column(name = "is_archive")
+    private boolean isArchive;
 
+    @NotNull
+    @Column(name = "not_used_in_model")
+    private boolean notUsedInModel;
+
+    @NotNull
+    @Column(name = "to_valuation")
+    private boolean toValuation;
+
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "offerer_id")
+    private User offerer;
+
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "project_id")
+    private Project project;
 }

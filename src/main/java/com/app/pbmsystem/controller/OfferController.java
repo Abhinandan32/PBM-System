@@ -1,8 +1,7 @@
 package com.app.pbmsystem.controller;
 
-import com.app.pbmsystem.model.Offer;
+import com.app.pbmsystem.model.Project;
 import com.app.pbmsystem.service.OfferService;
-import com.app.pbmsystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,12 +26,12 @@ public class OfferController {
     }
 
     @RequestMapping(value = "/offers", method = RequestMethod.GET)
-    public ResponseEntity<List<Offer>> getOffers() {
-        List<Offer> offers = offerService.offerList();
-        if (offers.isEmpty()) {
+    public ResponseEntity<List<Project>> getOffers() {
+        List<Project> projects = offerService.offerList();
+        if (projects.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(offers, HttpStatus.OK);
+        return new ResponseEntity<>(projects, HttpStatus.OK);
     }
 
 

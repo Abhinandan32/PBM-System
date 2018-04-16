@@ -1,6 +1,6 @@
 package com.app.pbmsystem.service;
 
-import com.app.pbmsystem.model.Offer;
+import com.app.pbmsystem.model.Project;
 import com.app.pbmsystem.repository.OfferRepository;
 
 import com.app.pbmsystem.repository.UserRepository;
@@ -27,18 +27,18 @@ public class OfferService {
         this.userRepository = userRepository;
     }
 
-    public List<Offer> offerList(){
-        List<Offer> offers = new ArrayList<>();
-        offers.addAll(offerRepository.findAll());
-        return offers;
+    public List<Project> offerList(){
+        List<Project> projects = new ArrayList<>();
+        projects.addAll(offerRepository.findAll());
+        return projects;
     }
 
-    public void addOffer(Offer offer){
-        offer.setOfferer(userRepository.findOneById(offer.getId()));
-        offerRepository.save(offer);
-    }
+//    public void addOffer(Project project){
+//        project.setOfferer(userRepository.findOneById(project.getId()));
+//        offerRepository.save(project);
+//    }
 
-    public Optional<Offer> findOfferById(long id){
+    public Optional<Project> findOfferById(long id){
         return offerRepository.findById(id);
     }
 
