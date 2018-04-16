@@ -36,6 +36,8 @@ public class CsvFileService {
                 c.setArchive(true);
                 c.setToValuation(false);
                 c.setNotUsedInModel(true);
+                c.setEstimatedTime((long) 0);
+                c.setValuationCost((long) 0);
             });
 
             controlCabinetRepository.saveAll(controlCabinets);
