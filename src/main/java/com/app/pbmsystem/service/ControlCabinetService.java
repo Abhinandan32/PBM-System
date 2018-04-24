@@ -27,4 +27,16 @@ public class ControlCabinetService {
         controlCabinets.addAll(controlCabinetRepository.findAll());
         return controlCabinets;
     }
+
+    public void dropAll(){
+        controlCabinetRepository.deleteAll();
+    }
+
+    public void addCabinet(ControlCabinet controlCabinet){
+        controlCabinetRepository.save(controlCabinet);
+    }
+
+    public void deleteById(Long id){
+        controlCabinetRepository.deleteById(id);
+    }
 }

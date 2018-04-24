@@ -17,12 +17,16 @@ import java.util.List;
 
 @Service
 public class CsvFileService {
-    @Autowired
+
     private ControlCabinetRepository controlCabinetRepository;
 
+    @Autowired
+    public CsvFileService(ControlCabinetRepository controlCabinetRepository) {
+        this.controlCabinetRepository = controlCabinetRepository;
+    }
 
     public void store(MultipartFile multipartFile) throws IOException {
-        File file = convertMulitpartFile(multipartFile);
+        File file = convertMultipartFile(multipartFile);
 
         try (Reader reader = new FileReader(file)) {
             @SuppressWarnings({"unchecked"})
@@ -45,7 +49,7 @@ public class CsvFileService {
         }
     }
 
-    private File convertMulitpartFile(MultipartFile multipartFile) throws IOException {
+    private File convertMultipartFile(MultipartFile multipartFile) throws IOException {
         File convFile = new File(multipartFile.getOriginalFilename());
         FileOutputStream fos = new FileOutputStream(convFile);
         fos.write(multipartFile.getBytes());

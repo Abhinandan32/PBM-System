@@ -8,12 +8,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by dawidbranicki on 14.04.2018.
  */
 
 @RestController
+@RequestMapping(value = "/user")
 public class UserController {
 
     private UserService userService;
@@ -24,7 +26,7 @@ public class UserController {
 
     }
 
-    @RequestMapping(value = "/users", method = RequestMethod.GET)
+    @RequestMapping(value = "/get", method = RequestMethod.GET)
     public ResponseEntity<List<User>> getUsers() {
         List<User> users = userService.getAllUsers();
         if (users.isEmpty()) {
@@ -33,7 +35,7 @@ public class UserController {
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/newUser", method = RequestMethod.POST)
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
     public ResponseEntity addUser(@RequestBody User user) {
         if (userService.isExist(user)) {
             return new ResponseEntity(HttpStatus.CONFLICT);
@@ -42,18 +44,18 @@ public class UserController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
-    public ResponseEntity<User> getUserById(@PathVariable long id) {
-        User user = userService.getUser(id);
+    @RequestMapping(value = "/get/{id}", method = RequestMethod.GET)
+    public ResponseEntity getUserById(@PathVariable long id) {
+        Optional<User> user = userService.getUser(id);
         if (user == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/deleteUser/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
     public ResponseEntity deleteUser(@PathVariable long id) {
-        User user = userService.getUser(id);
+        Optional<User> user = userService.getUser(id);
         if (user == null) {
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         }

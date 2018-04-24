@@ -1,20 +1,22 @@
 package com.app.pbmsystem.model;
 
 import com.opencsv.bean.CsvBindByName;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "control_cabinet")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 public class ControlCabinet {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) //TODO maybe better option will be create custom generator?
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
@@ -84,13 +86,13 @@ public class ControlCabinet {
     private boolean toValuation;
 
     //    @NotNull
-//    @CsvBindByName(column = "Offerent") //TODO I don't know why it doesn't work, some problem with relation betwean tables
+    @CsvBindByName(column = "Offerent")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "offerer_id")
     private User offerer;
 
     //    @NotNull
-//    @CsvBindByName(column = "Project") //TODO I don't know why it doesn't work, some problem with relation betwean tables
+//    @CsvBindByName(column = "Project", required = true)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "project_id")
     private Project project;

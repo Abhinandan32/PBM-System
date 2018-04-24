@@ -1,9 +1,8 @@
 package com.app.pbmsystem.service;
 
 import com.app.pbmsystem.model.Project;
-import com.app.pbmsystem.repository.OfferRepository;
-
 import com.app.pbmsystem.repository.ProjectRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,30 +16,28 @@ import java.util.Optional;
 @Service
 public class ProjectService {
 
-    private OfferRepository offerRepository;
-
     private ProjectRepository projectRepository;
 
     @Autowired
-    public ProjectService(OfferRepository offerRepository, ProjectRepository projectRepository) {
-        this.offerRepository = offerRepository;
+    public ProjectService(ProjectRepository projectRepository) {
         this.projectRepository = projectRepository;
     }
 
-    public List<Project> offerList(){
+    public List<Project> projectsList(){
         List<Project> projects = new ArrayList<>();
-        projects.addAll(offerRepository.findAll());
+        projects.addAll(projectRepository.findAll());
         return projects;
     }
 
-    //TODO
-//    public void addOffer(Project project){
-//        project.setOfferer(projectRepository.findOneById(project.getId()));
-//        offerRepository.save(project);
-//    }
-
     public Optional<Project> findOfferById(long id){
-        return offerRepository.findById(id);
+        return projectRepository.findById(id);
     }
 
+    public void addProject(Project project) {
+        projectRepository.save(project);
+    }
+
+    public void deleteById(Long id) {
+        projectRepository.deleteById(id);
+    }
 }
