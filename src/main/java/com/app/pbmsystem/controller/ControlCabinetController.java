@@ -72,6 +72,9 @@ public class ControlCabinetController {
     @RequestMapping(value = "/project/{id}", method = RequestMethod.GET)
     public ResponseEntity<List<ControlCabinet>> getCabinetsForProjectId(@PathVariable Long id){
         List<ControlCabinet> controlCabinets = controlCabinetService.getCabinetsForProject(id);
+        if (controlCabinets.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
         return new ResponseEntity<>(controlCabinets, HttpStatus.OK);
     }
 }

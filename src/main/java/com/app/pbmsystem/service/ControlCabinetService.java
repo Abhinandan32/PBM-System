@@ -39,4 +39,10 @@ public class ControlCabinetService {
     public void deleteById(Long id){
         controlCabinetRepository.deleteById(id);
     }
+
+    public List<ControlCabinet> getCabinetsForProject(Long id) {
+        List<ControlCabinet> controlCabinets = new ArrayList<>();
+
+        return controlCabinets;
+    }
 }
