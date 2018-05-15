@@ -1,5 +1,6 @@
 package com.app.pbmsystem.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.opencsv.bean.CsvBindByName;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,12 +8,13 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "control_cabinet")
 @Getter
 @Setter
 @NoArgsConstructor
+@Table(name = "control_cabinet")
 public class ControlCabinet {
 
     @Id
@@ -25,13 +27,17 @@ public class ControlCabinet {
     @Column(name = "real_time")
     private Long realTime;
 
-    //    @NotNull
     @Column(name = "esitmated_time")
     private Long estimatedTime;
 
-    //    @NotNull
     @Column(name = "valuation_cost")
     private Long valuationCost;
+
+    @NotNull
+    @Size(max = 25)
+    @CsvBindByName(column = "NAME")
+    @Column(name = "name", unique = true)
+    private String name;
 
     @NotNull
     @CsvBindByName(column = "PRICE")
@@ -85,15 +91,16 @@ public class ControlCabinet {
     @Column(name = "to_valuation")
     private boolean toValuation;
 
-    //    @NotNull
+    @NotNull
+    @JsonIgnore
+    @Column(name = "offerer_id")
     @CsvBindByName(column = "Offerent")
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "offerer_id")
-    private User offerer;
+    private Long offerer_id;
 
-    //    @NotNull
-//    @CsvBindByName(column = "Project", required = true)
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "project_id")
-    private Project project;
+    @NotNull
+    @JsonIgnore
+    @Column(name = "project_id")
+    @CsvBindByName(column = "Project")
+    private Long project_id;
+
 }

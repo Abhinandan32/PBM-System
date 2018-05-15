@@ -68,4 +68,10 @@ public class ControlCabinetController {
             return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(msg);
         }
     }
+
+    @RequestMapping(value = "/project/{id}", method = RequestMethod.GET)
+    public ResponseEntity<List<ControlCabinet>> getCabinetsForProjectId(@PathVariable Long id){
+        List<ControlCabinet> controlCabinets = controlCabinetService.getCabinetsForProject(id);
+        return new ResponseEntity<>(controlCabinets, HttpStatus.OK);
+    }
 }
