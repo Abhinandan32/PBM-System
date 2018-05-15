@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by dawidbranicki on 15.04.2018.
@@ -38,5 +39,9 @@ public class ControlCabinetService {
 
     public void deleteById(Long id){
         controlCabinetRepository.deleteById(id);
+    }
+
+    public List<ControlCabinet> getCabinetsForProject(Long id) {
+        return controlCabinetRepository.findAll().stream().filter(c -> c.getProject_id().equals(id)).collect(Collectors.toList());
     }
 }
