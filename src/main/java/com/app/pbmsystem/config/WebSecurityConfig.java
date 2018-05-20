@@ -52,7 +52,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and()
                 .authorizeRequests()
-                .antMatchers("/user/get", "/cabinet/**", "/project/**")
+                .antMatchers("/user/login", "/logout")
                 .permitAll()
                 .anyRequest()
                 .fullyAuthenticated()
