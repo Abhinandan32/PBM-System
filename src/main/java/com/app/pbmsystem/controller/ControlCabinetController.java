@@ -1,8 +1,9 @@
 package com.app.pbmsystem.controller;
 
 import com.app.pbmsystem.model.ControlCabinet;
-import com.app.pbmsystem.service.ControlCabinetService;
-import com.app.pbmsystem.service.CsvFileService;
+import com.app.pbmsystem.service.IControlCabinetService;
+import com.app.pbmsystem.service.impl.ControlCabinetService;
+import com.app.pbmsystem.service.impl.CsvFileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,11 +19,11 @@ import java.util.List;
 @RequestMapping(value = "/cabinet")
 public class ControlCabinetController {
 
-    private ControlCabinetService controlCabinetService;
+    private IControlCabinetService controlCabinetService;
     private CsvFileService csvFileService;
 
     @Autowired
-    public ControlCabinetController(ControlCabinetService controlCabinetService, CsvFileService csvFileService) {
+    public ControlCabinetController(IControlCabinetService controlCabinetService, CsvFileService csvFileService) {
         this.controlCabinetService = controlCabinetService;
         this.csvFileService = csvFileService;
     }

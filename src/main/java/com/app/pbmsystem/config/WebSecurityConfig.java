@@ -1,6 +1,6 @@
 package com.app.pbmsystem.config;
 
-import com.app.pbmsystem.service.UserDetailService;
+import com.app.pbmsystem.service.impl.UserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.context.annotation.Bean;

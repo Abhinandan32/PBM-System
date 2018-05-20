@@ -8,7 +8,7 @@ import java.util.Optional;
 /**
  * Created by dawidbranicki on 20.05.2018.
  */
-public interface UserService {
+public interface IUserService {
     List<User> getAllUsers();
 
     void addUser(User user);

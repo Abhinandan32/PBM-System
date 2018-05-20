@@ -1,7 +1,8 @@
 package com.app.pbmsystem.controller;
 
 import com.app.pbmsystem.model.User;
-import com.app.pbmsystem.service.UserServiceImpl;
+import com.app.pbmsystem.service.IUserService;
+import com.app.pbmsystem.service.impl.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,11 +24,11 @@ public class UserController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
 
-    private UserServiceImpl userServiceImpl;
+    private IUserService userService;
 
     @Autowired
-    public UserController(UserServiceImpl userServiceImpl) {
-        this.userServiceImpl = userServiceImpl;
+    public UserController(IUserService userService) {
+        this.userService = userService;
     }
 
     @RequestMapping(value = "/login")
@@ -38,7 +39,7 @@ public class UserController {
 
     @RequestMapping(value = "/get", method = RequestMethod.GET)
     public ResponseEntity<List<User>> getUsers() {
-        List<User> users = userServiceImpl.getAllUsers();
+        List<User> users = userService.getAllUsers();
         if (users.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -47,17 +48,17 @@ public class UserController {
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public ResponseEntity addUser(@RequestBody User user) {
-        if (userServiceImpl.isExist(user)) {
+        if (userService.isExist(user)) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("User e-email " +
                     user.getEmail() + " is already in system");
         }
-        userServiceImpl.addUser(user);
+        userService.addUser(user);
         return new ResponseEntity(HttpStatus.OK);
     }
 
     @RequestMapping(value = "/get/{id}", method = RequestMethod.GET)
     public ResponseEntity getUserById(@PathVariable long id) {
-        Optional<User> user = userServiceImpl.getUser(id);
+        Optional<User> user = userService.getUser(id);
         if (user == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -66,11 +67,11 @@ public class UserController {
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
     public ResponseEntity deleteUser(@PathVariable long id) {
-        Optional<User> user = userServiceImpl.getUser(id);
+        Optional<User> user = userService.getUser(id);
         if (user == null) {
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
-        userServiceImpl.deleteUser(id);
+        userService.deleteUser(id);
         return new ResponseEntity(HttpStatus.OK);
     }
 }

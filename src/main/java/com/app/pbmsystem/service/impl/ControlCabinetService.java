@@ -1,7 +1,8 @@
-package com.app.pbmsystem.service;
+package com.app.pbmsystem.service.impl;
 
 import com.app.pbmsystem.model.ControlCabinet;
 import com.app.pbmsystem.repository.ControlCabinetRepository;
+import com.app.pbmsystem.service.IControlCabinetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +15,7 @@ import java.util.stream.Collectors;
  */
 
 @Service
-public class ControlCabinetService {
+public class ControlCabinetService implements IControlCabinetService {
 
     private ControlCabinetRepository controlCabinetRepository;
 
@@ -23,24 +24,29 @@ public class ControlCabinetService {
         this.controlCabinetRepository = controlCabinetRepository;
     }
 
-    public List<ControlCabinet> controlCabinets(){
+    @Override
+    public List<ControlCabinet> controlCabinets() {
         List<ControlCabinet> controlCabinets = new ArrayList<>();
         controlCabinets.addAll(controlCabinetRepository.findAll());
         return controlCabinets;
     }
 
-    public void dropAll(){
+    @Override
+    public void dropAll() {
         controlCabinetRepository.deleteAll();
     }
 
-    public void addCabinet(ControlCabinet controlCabinet){
+    @Override
+    public void addCabinet(ControlCabinet controlCabinet) {
         controlCabinetRepository.save(controlCabinet);
     }
 
-    public void deleteById(Long id){
+    @Override
+    public void deleteById(Long id) {
         controlCabinetRepository.deleteById(id);
     }
 
+    @Override
     public List<ControlCabinet> getCabinetsForProject(Long id) {
         return controlCabinetRepository.findAll().stream().filter(c -> c.getProject_id().equals(id)).collect(Collectors.toList());
     }

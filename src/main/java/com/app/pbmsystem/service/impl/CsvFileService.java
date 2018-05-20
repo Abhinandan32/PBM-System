@@ -1,4 +1,4 @@
-package com.app.pbmsystem.service;
+package com.app.pbmsystem.service.impl;
 
 import com.app.pbmsystem.model.ControlCabinet;
 import com.app.pbmsystem.repository.ControlCabinetRepository;
