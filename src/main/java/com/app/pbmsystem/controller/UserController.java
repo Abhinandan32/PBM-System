@@ -1,12 +1,16 @@
 package com.app.pbmsystem.controller;
 
 import com.app.pbmsystem.model.User;
-import com.app.pbmsystem.service.UserService;
+import com.app.pbmsystem.service.IUserService;
+import com.app.pbmsystem.service.impl.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,12 +22,19 @@ import java.util.Optional;
 @RequestMapping(value = "/user")
 public class UserController {
 
-    private UserService userService;
+    private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
+
+    private IUserService userService;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(IUserService userService) {
         this.userService = userService;
+    }
 
+    @RequestMapping(value = "/login")
+    public Principal user(Principal principal) {
+        LOGGER.info("user logged " + principal);
+        return principal;
     }
 
     @RequestMapping(value = "/get", method = RequestMethod.GET)
@@ -38,7 +49,8 @@ public class UserController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public ResponseEntity addUser(@RequestBody User user) {
         if (userService.isExist(user)) {
-            return new ResponseEntity(HttpStatus.CONFLICT);
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("User e-email " +
+                    user.getEmail() + " is already in system");
         }
         userService.addUser(user);
         return new ResponseEntity(HttpStatus.OK);

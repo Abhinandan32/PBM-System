@@ -1,7 +1,8 @@
 package com.app.pbmsystem.controller;
 
 import com.app.pbmsystem.model.Project;
-import com.app.pbmsystem.service.ProjectService;
+import com.app.pbmsystem.service.IProjectService;
+import com.app.pbmsystem.service.impl.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,10 +19,10 @@ import java.util.Optional;
 @RequestMapping(value = "/project")
 public class ProjectController {
 
-    private ProjectService projectService;
+    private IProjectService projectService;
 
     @Autowired
-    public ProjectController(ProjectService projectService) {
+    public ProjectController(IProjectService projectService) {
         this.projectService = projectService;
     }
 
