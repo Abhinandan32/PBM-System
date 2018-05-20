@@ -2,7 +2,6 @@ package com.app.pbmsystem.model;
 
 import com.app.pbmsystem.model.enums.Role;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -15,7 +15,7 @@ import java.util.Optional;
  * Created by dawidbranicki on 15.04.2018.
  */
 @Service
-public class ProjectService implements IProjectService{
+public class ProjectService implements IProjectService {
 
     private ProjectRepository projectRepository;
 
@@ -25,14 +25,14 @@ public class ProjectService implements IProjectService{
     }
 
     @Override
-    public List<Project> projectsList(){
+    public List<Project> projectsList() {
         List<Project> projects = new ArrayList<>();
         projects.addAll(projectRepository.findAll());
         return projects;
     }
 
     @Override
-    public Optional<Project> findOfferById(long id){
+    public Optional<Project> findOfferById(long id) {
         return projectRepository.findById(id);
     }
 

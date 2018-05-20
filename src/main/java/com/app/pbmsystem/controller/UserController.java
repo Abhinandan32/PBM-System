@@ -2,7 +2,6 @@ package com.app.pbmsystem.controller;
 
 import com.app.pbmsystem.model.User;
 import com.app.pbmsystem.service.IUserService;
-import com.app.pbmsystem.service.impl.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

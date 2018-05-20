@@ -1,7 +1,6 @@
 package com.app.pbmsystem.service.impl;
 
 import com.app.pbmsystem.model.User;
-import com.app.pbmsystem.service.impl.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

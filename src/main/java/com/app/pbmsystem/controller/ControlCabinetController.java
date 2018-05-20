@@ -2,7 +2,6 @@ package com.app.pbmsystem.controller;
 
 import com.app.pbmsystem.model.ControlCabinet;
 import com.app.pbmsystem.service.IControlCabinetService;
-import com.app.pbmsystem.service.impl.ControlCabinetService;
 import com.app.pbmsystem.service.impl.CsvFileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -71,9 +70,9 @@ public class ControlCabinetController {
     }
 
     @RequestMapping(value = "/project/{id}", method = RequestMethod.GET)
-    public ResponseEntity<List<ControlCabinet>> getCabinetsForProjectId(@PathVariable Long id){
+    public ResponseEntity<List<ControlCabinet>> getCabinetsForProjectId(@PathVariable Long id) {
         List<ControlCabinet> controlCabinets = controlCabinetService.getCabinetsForProject(id);
-        if (controlCabinets.isEmpty()){
+        if (controlCabinets.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(controlCabinets, HttpStatus.OK);
