@@ -1,5 +1,6 @@
 package com.app.pbmsystem.service;
 
+import com.app.pbmsystem.dto.ControlCabinetDTO;
 import com.app.pbmsystem.model.ControlCabinet;
 
 import java.util.List;
@@ -17,5 +18,5 @@ public interface IControlCabinetService {
 
     void deleteById(Long id);
 
-    List<ControlCabinet> getCabinetsForProject(Long id);
+    List<ControlCabinetDTO> getCabinetsForProject(Long id);
 }
