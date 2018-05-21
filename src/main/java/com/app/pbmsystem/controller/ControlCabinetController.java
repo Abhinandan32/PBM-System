@@ -1,5 +1,6 @@
 package com.app.pbmsystem.controller;
 
+import com.app.pbmsystem.dto.ControlCabinetDTO;
 import com.app.pbmsystem.model.ControlCabinet;
 import com.app.pbmsystem.service.IControlCabinetService;
 import com.app.pbmsystem.service.impl.CsvFileService;
@@ -70,8 +71,8 @@ public class ControlCabinetController {
     }
 
     @RequestMapping(value = "/project/{id}", method = RequestMethod.GET)
-    public ResponseEntity<List<ControlCabinet>> getCabinetsForProjectId(@PathVariable Long id) {
-        List<ControlCabinet> controlCabinets = controlCabinetService.getCabinetsForProject(id);
+    public ResponseEntity<List<ControlCabinetDTO>> getCabinetsForProjectId(@PathVariable Long id) {
+        List<ControlCabinetDTO> controlCabinets = controlCabinetService.getCabinetsForProject(id);
         if (controlCabinets.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

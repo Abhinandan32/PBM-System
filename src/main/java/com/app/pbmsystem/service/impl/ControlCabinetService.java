@@ -24,8 +24,9 @@ public class ControlCabinetService implements IControlCabinetService {
     private ControlCabinetMapper controlCabinetMapper;
 
     @Autowired
-    public ControlCabinetService(ControlCabinetRepository controlCabinetRepository) {
+    public ControlCabinetService(ControlCabinetRepository controlCabinetRepository, ControlCabinetMapper controlCabinetMapper) {
         this.controlCabinetRepository = controlCabinetRepository;
+        this.controlCabinetMapper = controlCabinetMapper;
     }
 
     @Override
