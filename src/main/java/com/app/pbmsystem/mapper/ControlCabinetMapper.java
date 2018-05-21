@@ -7,8 +7,6 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
 /**
  * Created by dawidbranicki on 21.05.2018.
  */
@@ -17,8 +15,8 @@ import java.util.List;
 public interface ControlCabinetMapper {
 
     @Mappings({
-            @Mapping(target = "name", source = "entity.cabinetName"),
-            @Mapping(target = "toValuation", source = "entity.isValuated")
+            @Mapping(target = "cabinetName", source = "entity.name"),
+            @Mapping(target = "valuated", source = "entity.toValuation")
     })
     ControlCabinetDTO CONTROL_CABINET_DTO(ControlCabinet entity);
 
