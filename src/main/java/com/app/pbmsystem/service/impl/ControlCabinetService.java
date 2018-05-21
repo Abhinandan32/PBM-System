@@ -1,5 +1,7 @@
 package com.app.pbmsystem.service.impl;
 
+import com.app.pbmsystem.dto.ControlCabinetDTO;
+import com.app.pbmsystem.mapper.ControlCabinetMapper;
 import com.app.pbmsystem.model.ControlCabinet;
 import com.app.pbmsystem.repository.ControlCabinetRepository;
 import com.app.pbmsystem.service.IControlCabinetService;
@@ -19,9 +21,12 @@ public class ControlCabinetService implements IControlCabinetService {
 
     private ControlCabinetRepository controlCabinetRepository;
 
+    private ControlCabinetMapper controlCabinetMapper;
+
     @Autowired
-    public ControlCabinetService(ControlCabinetRepository controlCabinetRepository) {
+    public ControlCabinetService(ControlCabinetRepository controlCabinetRepository, ControlCabinetMapper controlCabinetMapper) {
         this.controlCabinetRepository = controlCabinetRepository;
+        this.controlCabinetMapper = controlCabinetMapper;
     }
 
     @Override
@@ -47,7 +52,8 @@ public class ControlCabinetService implements IControlCabinetService {
     }
 
     @Override
-    public List<ControlCabinet> getCabinetsForProject(Long id) {
-        return controlCabinetRepository.findAll().stream().filter(c -> c.getProject_id().equals(id)).collect(Collectors.toList());
+    public List<ControlCabinetDTO> getCabinetsForProject(Long id) {
+        return controlCabinetRepository.findAll().stream().filter(c -> c.getProject_id().equals(id))
+                .map(entity -> controlCabinetMapper.CONTROL_CABINET_DTO(entity)).collect(Collectors.toList());
     }
 }
