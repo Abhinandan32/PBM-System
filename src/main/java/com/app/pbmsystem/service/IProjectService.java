@@ -1,5 +1,6 @@
 package com.app.pbmsystem.service;
 
+import com.app.pbmsystem.dto.ProjectDTO;
 import com.app.pbmsystem.model.Project;
 
 import java.util.List;
@@ -11,9 +12,12 @@ import java.util.Optional;
 public interface IProjectService {
     List<Project> projectsList();
 
-    Optional<Project> findOfferById(long id);
+    Optional<Project> findProjectById(long id);
 
     void addProject(Project project);
 
     void deleteById(Long id);
+
+    List<ProjectDTO> projectListDTO();
+
 }
