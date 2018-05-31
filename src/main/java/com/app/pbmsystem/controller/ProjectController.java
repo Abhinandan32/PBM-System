@@ -1,5 +1,6 @@
 package com.app.pbmsystem.controller;
 
+import com.app.pbmsystem.dto.ProjectDTO;
 import com.app.pbmsystem.model.Project;
 import com.app.pbmsystem.service.IProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,15 @@ public class ProjectController {
         return new ResponseEntity<>(projects, HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/get/names", method = RequestMethod.GET)
+    public ResponseEntity<List<ProjectDTO>> getProjectsNames() {
+        List<ProjectDTO> projects = projectService.projectListDTO();
+        if (projects.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(projects, HttpStatus.OK);
+    }
+
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public ResponseEntity<Project> addProject(@RequestBody Project project) {
         projectService.addProject(project);
@@ -48,8 +58,8 @@ public class ProjectController {
 
     @RequestMapping(value = "/get/{id}", method = RequestMethod.GET)
     public ResponseEntity getProject(@PathVariable Long id) {
-        projectService.findOfferById(id);
-        Optional<Project> project = projectService.findOfferById(id);
+        projectService.findProjectById(id);
+        Optional<Project> project = projectService.findProjectById(id);
         return new ResponseEntity<>(project, HttpStatus.OK);
     }
 }

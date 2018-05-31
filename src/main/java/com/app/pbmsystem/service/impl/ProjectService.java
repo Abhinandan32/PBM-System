@@ -1,5 +1,7 @@
 package com.app.pbmsystem.service.impl;
 
+import com.app.pbmsystem.dto.ProjectDTO;
+import com.app.pbmsystem.mapper.ProjectMapper;
 import com.app.pbmsystem.model.Project;
 import com.app.pbmsystem.repository.ProjectRepository;
 
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * Created by dawidbranicki on 15.04.2018.
@@ -18,10 +21,12 @@ import java.util.Optional;
 public class ProjectService implements IProjectService {
 
     private ProjectRepository projectRepository;
+    private ProjectMapper projectMapper;
 
     @Autowired
-    public ProjectService(ProjectRepository projectRepository) {
+    public ProjectService(ProjectRepository projectRepository, ProjectMapper projectMapper) {
         this.projectRepository = projectRepository;
+        this.projectMapper = projectMapper;
     }
 
     @Override
@@ -32,7 +37,7 @@ public class ProjectService implements IProjectService {
     }
 
     @Override
-    public Optional<Project> findOfferById(long id) {
+    public Optional<Project> findProjectById(long id) {
         return projectRepository.findById(id);
     }
 
@@ -44,5 +49,12 @@ public class ProjectService implements IProjectService {
     @Override
     public void deleteById(Long id) {
         projectRepository.deleteById(id);
+    }
+
+    @Override
+    public List<ProjectDTO> projectListDTO() {
+        return projectsList().stream()
+                .map(entity -> projectMapper.PROJECT_DTO(entity))
+                .collect(Collectors.toList());
     }
 }
