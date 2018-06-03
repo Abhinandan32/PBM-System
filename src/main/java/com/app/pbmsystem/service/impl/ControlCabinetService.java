@@ -69,7 +69,9 @@ public class ControlCabinetService implements IControlCabinetService {
 
     @Override
     public List<ControlCabinetDTO> getCabinetsForProject(Long id) {
-        return controlCabinetRepository.findAll().stream().filter(c -> c.getProject_id().equals(id))
-                .map(entity -> controlCabinetMapper.CONTROL_CABINET_DTO_BASIC_INFO(entity)).collect(Collectors.toList());
+        return controlCabinetRepository.findAll()
+                .stream().filter(c -> c.getProject_id().equals(id))
+                .map(entity -> controlCabinetMapper.CONTROL_CABINET_DTO_BASIC_INFO(entity))
+                .collect(Collectors.toList());
     }
 }
