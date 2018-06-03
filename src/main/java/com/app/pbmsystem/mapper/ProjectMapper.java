@@ -13,7 +13,6 @@ import org.springframework.stereotype.Component;
 @Mapper(componentModel = "spring")
 public interface ProjectMapper {
 
-
-    @Mapping(target ="projectName" , source ="entity.name" )
+    @Mapping(target = "projectName", source = "entity.name")
     ProjectDTO PROJECT_DTO(Project entity);
 }

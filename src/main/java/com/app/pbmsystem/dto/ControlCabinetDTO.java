@@ -14,4 +14,16 @@ public class ControlCabinetDTO {
     private Long id;
     private String cabinetName;
     private boolean isValuated;
+    private Long adjustedCost;
+    private Long contactorsAmount;
+    private Long current;
+    private boolean isArchive;
+    private boolean notUsedInModel;
+    private Long plcInput;
+    private Long plcOutput;
+    private Long project_id;
+    private Long realTime;
+    private Long protectionAmount;
+    private Long safety;
+    private Long driveAmount;
 }

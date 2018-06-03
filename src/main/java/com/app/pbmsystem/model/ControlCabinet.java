@@ -91,7 +91,6 @@ public class ControlCabinet {
     @Column(name = "to_valuation")
     private boolean toValuation;
 
-    @NotNull
     @JsonIgnore
     @Column(name = "offerer_id")
     @CsvBindByName(column = "Offerent")

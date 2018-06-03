@@ -51,6 +51,22 @@ public class ControlCabinetController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public ResponseEntity addCabinet(@RequestBody ControlCabinetDTO controlCabinetDTO) {
+        controlCabinetService.addCabinet(controlCabinetDTO);
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/edit", method = RequestMethod.PUT)
+    public ResponseEntity editCabinet(@RequestBody ControlCabinetDTO controlCabinetDTO) {
+        if (controlCabinetService.isExist(controlCabinetDTO.getId()) == null) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("" +
+                    controlCabinetDTO.getId() + " is not correct");
+        }
+        controlCabinetService.editCabinet(controlCabinetDTO);
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
     @RequestMapping(value = "delete/{id}", method = RequestMethod.DELETE)
     public ResponseEntity deleteCabinet(@PathVariable Long id) {
         controlCabinetService.deleteById(id);
