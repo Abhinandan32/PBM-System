@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -20,6 +21,7 @@ import java.util.stream.Collectors;
 public class ControlCabinetService implements IControlCabinetService {
 
     private ControlCabinetRepository controlCabinetRepository;
+
     private ControlCabinetMapper controlCabinetMapper;
 
     @Autowired
@@ -46,15 +48,28 @@ public class ControlCabinetService implements IControlCabinetService {
     }
 
     @Override
+    public void addCabinet(ControlCabinetDTO controlCabinetDTO) {
+        controlCabinetRepository.save(controlCabinetMapper.CONTROL_CABINET(controlCabinetDTO));
+    }
+
+    @Override
+    public void editCabinet(ControlCabinetDTO controlCabinetDTO) {
+        controlCabinetRepository.save(controlCabinetMapper.CONTROL_CABINET(controlCabinetDTO));
+    }
+
+    @Override
     public void deleteById(Long id) {
         controlCabinetRepository.deleteById(id);
     }
 
     @Override
+    public Optional<ControlCabinet> isExist(Long id) {
+        return controlCabinetRepository.findById(id);
+    }
+
+    @Override
     public List<ControlCabinetDTO> getCabinetsForProject(Long id) {
-        return controlCabinetRepository.findAll()
-                .stream().filter(c -> c.getProject_id().equals(id))
-                .map(entity -> controlCabinetMapper.CONTROL_CABINET_DTO(entity))
-                .collect(Collectors.toList());
+        return controlCabinetRepository.findAll().stream().filter(c -> c.getProject_id().equals(id))
+                .map(entity -> controlCabinetMapper.CONTROL_CABINET_DTO_BASIC_INFO(entity)).collect(Collectors.toList());
     }
 }
