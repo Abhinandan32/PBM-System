@@ -51,14 +51,14 @@ public class ControlCabinetController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public ResponseEntity addCabinet(@RequestBody ControlCabinetDTO controlCabinetDTO) {
+    @RequestMapping(value = "/add-dto", method = RequestMethod.POST)
+    public ResponseEntity addCabinetDTO(@RequestBody ControlCabinetDTO controlCabinetDTO) {
         controlCabinetService.addCabinet(controlCabinetDTO);
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/edit", method = RequestMethod.PUT)
-    public ResponseEntity editCabinet(@RequestBody ControlCabinetDTO controlCabinetDTO) {
+    @RequestMapping(value = "/edit-dto", method = RequestMethod.PUT)
+    public ResponseEntity editCabinetDTO(@RequestBody ControlCabinetDTO controlCabinetDTO) {
         if (controlCabinetService.isExist(controlCabinetDTO.getId()) == null) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("" +
                     controlCabinetDTO.getId() + " is not correct");
