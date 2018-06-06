@@ -91,13 +91,12 @@ public class ControlCabinet {
     @Column(name = "to_valuation")
     private boolean toValuation;
 
-    @JsonIgnore
-    @Column(name = "offerer_id")
+
+    @Column(name = "offerer_id", nullable = false)
     @CsvBindByName(column = "Offerent")
     private Long offerer_id;
 
     @NotNull
-    @JsonIgnore
     @Column(name = "project_id")
     @CsvBindByName(column = "Project")
     private Long project_id;
