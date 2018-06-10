@@ -21,7 +21,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/user")
-@Api(value = "PBM System", description = "All operations for users")
+@Api(value = "PBM System", description = "All operations for users", tags = "User")
 public class UserController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);

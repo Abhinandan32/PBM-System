@@ -19,7 +19,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping(value = "/cabinet")
-@Api(value = "PBM System", description = "All operation for control cabinets")
+@Api(value = "PBM System", description = "All operation for control cabinets", tags = "Control Cabinet")
 public class ControlCabinetController {
 
     private IControlCabinetService controlCabinetService;

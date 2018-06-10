@@ -19,7 +19,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/project")
-@Api(value = "PMB System", description = "All operation for projects")
+@Api(value = "PMB System", description = "All operation for projects", tags = "Project")
 public class ProjectController {
 
     private IProjectService projectService;
