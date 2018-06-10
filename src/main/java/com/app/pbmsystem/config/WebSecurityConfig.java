@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -26,9 +25,17 @@ import java.util.Collections;
 @Configurable
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-    private static final String ADD_USER_API_URL = "/rest/user/add";
     private static final String LOGOUT_API_URL = "/rest/logout";
     private static final String FRONT_APPLICATION_API = "http://localhost:4200"; //TODO tu trzeba będzie poźniej ustawić dokładny adres po wjesciu frontu na AWS
+    private static final String[] AUTH_LIST = {
+            "/rest/v2/api-docs",
+            "/rest/configuration/ui",
+            "/rest/swagger-resources/**",
+            "/rest/configuration/**",
+            "/rest/swagger-ui.html",
+            "/rest/webjars/**",
+            "/rest/user/add"
+    };
 
     private UserDetailService userDetailService;
 
@@ -42,11 +49,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userDetailService).passwordEncoder(passwordEncoder());
     }
 
-    @Override
-    public void configure(WebSecurity web) throws Exception {
-        super.configure(web);
-    }
-
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -56,7 +58,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and()
                 .authorizeRequests()
-                .antMatchers(ADD_USER_API_URL)
+                .antMatchers(AUTH_LIST)
                 .permitAll()
                 .anyRequest()
                 .fullyAuthenticated()
