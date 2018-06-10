@@ -5,6 +5,7 @@ import com.opencsv.bean.CsvBindByName;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -28,10 +29,10 @@ public class ControlCabinet {
     private Long realTime;
 
     @Column(name = "esitmated_time")
-    private Long estimatedTime;
+    private Long estimatedTime = (long) 0;
 
     @Column(name = "valuation_cost")
-    private Long valuationCost;
+    private Long valuationCost = (long) 0;
 
     @NotNull
     @Size(max = 25)

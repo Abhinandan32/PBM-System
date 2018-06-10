@@ -12,8 +12,8 @@ import lombok.Setter;
 @NoArgsConstructor
 public class ControlCabinetDTO {
     private Long id;
-    private String cabinetName;
-    private boolean isValuated;
+    private String name;
+    private boolean toValuation;
     private Long adjustedCost;
     private Long contactorsAmount;
     private Long current;

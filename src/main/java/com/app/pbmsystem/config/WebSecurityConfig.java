@@ -26,6 +26,9 @@ import java.util.Collections;
 @Configurable
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+    private static final String ADD_USER_API_URL = "/rest/user/add";
+    private static final String LOGOUT_API_URL = "/rest/logout";
+    private static final String FRONT_APPLICATION_API = "http://localhost:4200"; //TODO tu trzeba będzie poźniej ustawić dokładny adres po wjesciu frontu na AWS
 
     private UserDetailService userDetailService;
 
@@ -53,14 +56,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and()
                 .authorizeRequests()
-                .antMatchers("/user/login", "/logout", "/login")
+                .antMatchers(ADD_USER_API_URL)
                 .permitAll()
                 .anyRequest()
                 .fullyAuthenticated()
                 .and()
                 .logout()
                 .permitAll()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "POST"))
+                .logoutRequestMatcher(new AntPathRequestMatcher(LOGOUT_API_URL, "POST"))
                 .and()
                 .httpBasic()
                 .and()
@@ -73,7 +76,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Collections.singletonList("http://localhost:4200")); //TODO tu trzeba będzie poźniej ustawić dokładny adres po wjesciu frontu na AWS
+        configuration.setAllowedOrigins(Collections.singletonList(FRONT_APPLICATION_API));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("authorization", "content-type", "x-auth-token"));
         configuration.setExposedHeaders(Collections.singletonList("x-auth-token"));

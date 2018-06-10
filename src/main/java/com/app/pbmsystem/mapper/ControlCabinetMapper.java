@@ -15,8 +15,6 @@ import org.springframework.stereotype.Component;
 public interface ControlCabinetMapper {
 
     @Mappings({
-            @Mapping(target = "cabinetName", source = "entity.name"),
-            @Mapping(target = "valuated", source = "entity.toValuation"),
             @Mapping(target = "adjustedCost", ignore = true),
             @Mapping(target = "contactorsAmount", ignore = true),
             @Mapping(target = "current", ignore = true),
@@ -32,9 +30,5 @@ public interface ControlCabinetMapper {
     })
     ControlCabinetDTO CONTROL_CABINET_DTO_BASIC_INFO(ControlCabinet entity);
 
-    @Mappings({
-            @Mapping(target = "name", source = "dto.cabinetName"),
-            @Mapping(target = "toValuation", source = "dto.valuated")
-    })
     ControlCabinet CONTROL_CABINET(ControlCabinetDTO dto);
 }

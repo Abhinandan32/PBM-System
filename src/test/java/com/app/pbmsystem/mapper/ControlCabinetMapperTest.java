@@ -27,8 +27,8 @@ public class ControlCabinetMapperTest {
         ControlCabinetDTO dto = controlCabinetMapper.CONTROL_CABINET_DTO_BASIC_INFO(entity);
 
         assertEquals(dto.getId(), entity.getId());
-        assertEquals(dto.getCabinetName(), entity.getName());
-        assertEquals(dto.isValuated(), entity.isToValuation());
+        assertEquals(dto.getName(), entity.getName());
+        assertEquals(dto.isToValuation(), entity.isToValuation());
     }
 
     @Test
@@ -36,8 +36,8 @@ public class ControlCabinetMapperTest {
         ControlCabinetDTO dto = new ControlCabinetDTO();
         //given
         dto.setId((long) 1);
-        dto.setValuated(true);
-        dto.setCabinetName("test");
+        dto.setToValuation(true);
+        dto.setName("test");
         dto.setNotUsedInModel(true);
         dto.setArchive(true);
         dto.setAdjustedCost((long) 31121);
@@ -53,8 +53,8 @@ public class ControlCabinetMapperTest {
         ControlCabinet entity = controlCabinetMapper.CONTROL_CABINET(dto);
         //when
         assertEquals(entity.getId(), dto.getId());
-        assertEquals(entity.getName(), dto.getCabinetName());
-        assertEquals(entity.isToValuation(), dto.isValuated());
+        assertEquals(entity.getName(), dto.getName());
+        assertEquals(entity.isToValuation(), dto.isToValuation());
         assertEquals(entity.getAdjustedCost(), dto.getAdjustedCost());
         assertEquals(entity.getContactorsAmount(), dto.getContactorsAmount());
         assertEquals(entity.getCurrent(), dto.getCurrent());
