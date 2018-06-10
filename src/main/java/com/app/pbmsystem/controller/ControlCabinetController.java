@@ -4,6 +4,8 @@ import com.app.pbmsystem.dto.ControlCabinetDTO;
 import com.app.pbmsystem.model.ControlCabinet;
 import com.app.pbmsystem.service.IControlCabinetService;
 import com.app.pbmsystem.service.impl.CsvFileService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +19,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping(value = "/cabinet")
+@Api(value = "PBM System", description = "All operation for control cabinets")
 public class ControlCabinetController {
 
     private IControlCabinetService controlCabinetService;
@@ -28,6 +31,8 @@ public class ControlCabinetController {
         this.csvFileService = csvFileService;
     }
 
+
+    @ApiOperation(value = "View list of available control cabinets", response = ResponseEntity.class)
     @RequestMapping(value = "/get", method = RequestMethod.GET)
     public ResponseEntity<List<ControlCabinet>> getAllControlCabinets() {
         List<ControlCabinet> controlCabinets = controlCabinetService.controlCabinets();
@@ -35,6 +40,7 @@ public class ControlCabinetController {
         return new ResponseEntity<>(controlCabinets, HttpStatus.OK);
     }
 
+    @ApiOperation(value = "Delete all control cabinets")
     @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
     public ResponseEntity deleteAllData() {
         List<ControlCabinet> controlCabinets = controlCabinetService.controlCabinets();
@@ -45,18 +51,21 @@ public class ControlCabinetController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
+    @ApiOperation(value = "Add new control cabinet")
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public ResponseEntity addCabinet(@RequestBody ControlCabinet controlCabinet) {
         controlCabinetService.addCabinet(controlCabinet);
         return new ResponseEntity(HttpStatus.OK);
     }
 
+    @ApiOperation(value = "Add new control cabinet")
     @RequestMapping(value = "/add-dto", method = RequestMethod.POST)
     public ResponseEntity addCabinetDTO(@RequestBody ControlCabinetDTO controlCabinetDTO) {
         controlCabinetService.addCabinet(controlCabinetDTO);
         return new ResponseEntity(HttpStatus.OK);
     }
 
+    @ApiOperation(value = "Edit control cabinet")
     @RequestMapping(value = "/edit-dto", method = RequestMethod.PUT)
     public ResponseEntity editCabinetDTO(@RequestBody ControlCabinetDTO controlCabinetDTO) {
         if (controlCabinetService.isExist(controlCabinetDTO.getId()) == null) {
@@ -67,12 +76,14 @@ public class ControlCabinetController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
+    @ApiOperation(value = "Delete single control cabinet by using id")
     @RequestMapping(value = "delete/{id}", method = RequestMethod.DELETE)
     public ResponseEntity deleteCabinet(@PathVariable Long id) {
         controlCabinetService.deleteById(id);
         return new ResponseEntity(HttpStatus.OK);
     }
 
+    @ApiOperation(value = "Upload CSV file with control cabinets")
     @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
     public ResponseEntity<?> loadFile(@RequestPart MultipartFile file) {
         String msg;
@@ -86,6 +97,7 @@ public class ControlCabinetController {
         }
     }
 
+    @ApiOperation(value = "Get cabinets for single project")
     @RequestMapping(value = "/project/{id}", method = RequestMethod.GET)
     public ResponseEntity<List<ControlCabinetDTO>> getCabinetsForProjectId(@PathVariable Long id) {
         List<ControlCabinetDTO> controlCabinets = controlCabinetService.getCabinetsForProject(id);
