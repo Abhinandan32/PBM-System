@@ -1,38 +1,63 @@
-CREATE TABLE usr (
-  id BIGINT PRIMARY KEY,
-  first_name VARCHAR(255) NOT NULL,
-  last_name VARCHAR(255) NOT NULL,
-  role VARCHAR(32) NOT NULL CHECK (role IN ('BIDDER', 'PREFABRICATOR'))
-);
+create sequence hibernate_sequence
+;
 
-CREATE TABLE project (
-  id BIGINT PRIMARY KEY,
-  beginning_date DATE NOT NULL,
-  name VARCHAR(255) NOT NULL
-);
+create table usr
+(
+	id bigserial not null
+		constraint usr_pkey
+			primary key,
+	first_name varchar(30) not null,
+	last_name varchar(30) not null,
+	password varchar(100) not null,
+	email varchar(255) not null,
+	role varchar(255)
+)
+;
 
-CREATE TABLE control_cabinet (
-  id BIGINT PRIMARY KEY,
-  real_time BIGINT NOT NULL,
-  esitmated_time BIGINT NOT NULL,
-  valuation_cost BIGINT NOT NULL,
-  adjusted_cost BIGINT NOT NULL,
-  current BIGINT NOT NULL,
-  device_amount BIGINT NOT NULL,
-  plc_input BIGINT NOT NULL,
-  plc_output BIGINT NOT NULL,
-  drive_amount BIGINT NOT NULL,
-  protection_amount BIGINT NOT NULL,
-  contactors_amount BIGINT NOT NULL,
-  is_archive BOOLEAN NOT NULL,
-  not_used_in_model BOOLEAN NOT NULL,
-  to_valuation BOOLEAN NOT NULL,
-  offerer_id BIGINT NOT NULL REFERENCES usr(id),
-  project_id BIGINT NOT NULL REFERENCES project(id)
-);
+create unique index usr_email_uindex
+	on usr (email)
+;
 
--- CREATE TABLE offer_control_cabinet (
---   offer_id BIGINT NOT NULL REFERENCES project(id) ON DELETE CASCADE,
---   control_cabinet_id BIGINT NOT NULL REFERENCES control_cabinet(id) ON DELETE CASCADE,
---   PRIMARY KEY (offer_id, control_cabinet_id)
--- );
+create table project
+(
+	id bigserial not null
+		constraint project_pkey
+			primary key,
+	beginning_date date not null,
+	name varchar(255) not null
+)
+;
+
+create table control_cabinet
+(
+	id bigserial not null
+		constraint control_cabinet_pkey
+			primary key,
+	real_time bigint not null,
+	esitmated_time bigint,
+	valuation_cost bigint,
+	adjusted_cost bigint not null,
+	current bigint not null,
+	plc_input bigint not null,
+	plc_output bigint not null,
+	drive_amount bigint not null,
+	protection_amount bigint not null,
+	contactors_amount bigint not null,
+	is_archive boolean not null,
+	not_used_in_model boolean not null,
+	to_valuation boolean not null,
+	offerer_id bigint
+		constraint control_cabinet_offerer_id_fkey
+			references usr,
+	project_id bigint not null
+		constraint control_cabinet_project_id_fkey
+			references project,
+	safety bigint not null,
+	name varchar(25) not null
+)
+;
+
+create unique index control_cabinet_name_uindex
+	on control_cabinet (name)
+;
+

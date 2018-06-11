@@ -32,7 +32,9 @@ public class Project {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL
+            , orphanRemoval = true
+            , fetch = FetchType.EAGER)
     @JoinColumn(name = "project_id")
     private List<ControlCabinet> controlCabinets;
 }
