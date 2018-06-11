@@ -1,5 +1,5 @@
 package com.app.pbmsystem.controller;
-
+import java.util.ArrayList;
 import com.app.pbmsystem.dto.ControlCabinetDTO;
 import com.app.pbmsystem.model.ControlCabinet;
 import com.app.pbmsystem.service.IControlCabinetService;
@@ -62,6 +62,15 @@ public class ControlCabinetController {
     @RequestMapping(value = "/add-dto", method = RequestMethod.POST)
     public ResponseEntity addCabinetDTO(@RequestBody ControlCabinetDTO controlCabinetDTO) {
         controlCabinetService.addCabinet(controlCabinetDTO);
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "Add multiple control cabinet")
+    @RequestMapping(value = "/add_multiple-dto", method = RequestMethod.POST)
+    public ResponseEntity addCabinetDTO(@RequestBody ArrayList<ControlCabinetDTO> controlCabinetDTOArray) {
+        for (ControlCabinetDTO controlCabinetDTO : controlCabinetDTOArray) {
+            controlCabinetService.addCabinet(controlCabinetDTO);
+        }        
         return new ResponseEntity(HttpStatus.OK);
     }
 
