@@ -15,6 +15,8 @@ public interface IUserService {
 
     boolean isExist(User user);
 
+    boolean isExist(Long id);
+
     Optional<User> getUser(long id);
 
     void deleteUser(long id);

@@ -53,6 +53,9 @@ public class ProjectController {
     @ApiOperation(value = "Add new project")
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public ResponseEntity<Project> addProject(@RequestBody Project project) {
+        if (!projectService.isExist(project.getId())) {
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
         projectService.addProject(project);
         return new ResponseEntity<>(HttpStatus.OK);
     }
@@ -60,15 +63,28 @@ public class ProjectController {
     @ApiOperation(value = "Delete single project by using id")
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Project> deleteProject(@PathVariable Long id) {
+        if (!projectService.isExist(id)) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
         projectService.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "Edit single project")
+    @RequestMapping(value = "/edit", method = RequestMethod.PUT)
+    public ResponseEntity<Project> editProject(@RequestBody Project project) {
+        if (!projectService.isExist(project.getId())) {
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
+        projectService.editProject(project);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @ApiOperation(value = "Get single project by using id")
     @RequestMapping(value = "/get/{id}", method = RequestMethod.GET)
     public ResponseEntity getProject(@PathVariable Long id) {
-        projectService.findProjectById(id);
-        Optional<Project> project = projectService.findProjectById(id);
-        return new ResponseEntity<>(project, HttpStatus.OK);
+        return projectService.findProjectById(id)
+                .map(project -> new ResponseEntity<>(project, HttpStatus.OK))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 }

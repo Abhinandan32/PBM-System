@@ -4,7 +4,6 @@ import com.app.pbmsystem.dto.ControlCabinetDTO;
 import com.app.pbmsystem.model.ControlCabinet;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Created by dawidbranicki on 20.05.2018.
@@ -23,7 +22,7 @@ public interface IControlCabinetService {
 
     void deleteById(Long id);
 
-    Optional<ControlCabinet> isExist(Long id);
+    boolean isExist(Long id);
 
     List<ControlCabinetDTO> getCabinetsForProject(Long id);
 }

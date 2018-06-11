@@ -29,11 +29,10 @@ public class Project {
 
     @NotBlank
     @Size(max = 255)
-    @Column(name = "name")
+    @Column(name = "name", unique = true)
     private String name;
 
     @OneToMany(cascade = CascadeType.ALL
-            , orphanRemoval = true
             , fetch = FetchType.EAGER)
     @JoinColumn(name = "project_id")
     private List<ControlCabinet> controlCabinets;

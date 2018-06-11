@@ -65,18 +65,15 @@ public class UserController {
     @ApiOperation(value = "Get user using id")
     @RequestMapping(value = "/get/{id}", method = RequestMethod.GET)
     public ResponseEntity getUserById(@PathVariable long id) {
-        Optional<User> user = userService.getUser(id);
-        if (user == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<>(user, HttpStatus.OK);
+        return userService.getUser(id)
+                .map(user -> new ResponseEntity<>(user, HttpStatus.OK))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @ApiOperation(value = "Delete single user using id")
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
     public ResponseEntity deleteUser(@PathVariable long id) {
-        Optional<User> user = userService.getUser(id);
-        if (user == null) {
+        if (!userService.isExist(id)) {
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
         userService.deleteUser(id);

@@ -44,6 +44,11 @@ public class UserService implements IUserService {
     }
 
     @Override
+    public boolean isExist(Long id) {
+        return userRepository.findById(id).isPresent();
+    }
+
+    @Override
     public Optional<User> getUser(long id) {
         return userRepository.findById(id);
     }

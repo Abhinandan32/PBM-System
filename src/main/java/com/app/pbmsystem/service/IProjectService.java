@@ -20,4 +20,7 @@ public interface IProjectService {
 
     List<ProjectDTO> projectListDTO();
 
+    boolean isExist(Long id);
+
+    void editProject(Project project);
 }

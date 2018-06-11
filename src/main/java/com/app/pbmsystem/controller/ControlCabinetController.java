@@ -68,7 +68,7 @@ public class ControlCabinetController {
     @ApiOperation(value = "Edit control cabinet")
     @RequestMapping(value = "/edit-dto", method = RequestMethod.PUT)
     public ResponseEntity editCabinetDTO(@RequestBody ControlCabinetDTO controlCabinetDTO) {
-        if (controlCabinetService.isExist(controlCabinetDTO.getId()) == null) {
+        if (!controlCabinetService.isExist(controlCabinetDTO.getId())) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("" +
                     controlCabinetDTO.getId() + " is not correct");
         }
@@ -78,9 +78,12 @@ public class ControlCabinetController {
 
     @ApiOperation(value = "Delete single control cabinet by using id")
     @RequestMapping(value = "delete/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity deleteCabinet(@PathVariable Long id) {
+    public ResponseEntity<ControlCabinet> deleteCabinet(@PathVariable Long id) {
+        if (!controlCabinetService.isExist(id)) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
         controlCabinetService.deleteById(id);
-        return new ResponseEntity(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @ApiOperation(value = "Upload CSV file with control cabinets")

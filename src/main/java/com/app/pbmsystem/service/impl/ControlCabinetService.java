@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -63,8 +62,8 @@ public class ControlCabinetService implements IControlCabinetService {
     }
 
     @Override
-    public Optional<ControlCabinet> isExist(Long id) {
-        return controlCabinetRepository.findById(id);
+    public boolean isExist(Long id) {
+        return controlCabinetRepository.findById(id).isPresent();
     }
 
     @Override
