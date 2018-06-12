@@ -9,7 +9,7 @@ import java.util.Optional;
 /**
  * Created by dawidbranicki on 20.05.2018.
  */
-public interface IProjectService {
+public interface ProjectService {
     List<Project> projectsList();
 
     Optional<Project> findProjectById(long id);

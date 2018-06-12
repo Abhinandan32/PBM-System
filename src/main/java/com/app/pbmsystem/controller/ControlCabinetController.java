@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import com.app.pbmsystem.dto.ControlCabinetDTO;
 import com.app.pbmsystem.model.ControlCabinet;
-import com.app.pbmsystem.service.IControlCabinetService;
+import com.app.pbmsystem.service.ControlCabinetService;
 import com.app.pbmsystem.service.impl.CsvFileService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -24,11 +24,11 @@ import java.util.List;
 @Api(value = "PBM System", description = "All operation for control cabinets", tags = "Control Cabinet")
 public class ControlCabinetController {
 
-    private IControlCabinetService controlCabinetService;
+    private ControlCabinetService controlCabinetService;
     private CsvFileService csvFileService;
 
     @Autowired
-    public ControlCabinetController(IControlCabinetService controlCabinetService, CsvFileService csvFileService) {
+    public ControlCabinetController(ControlCabinetService controlCabinetService, CsvFileService csvFileService) {
         this.controlCabinetService = controlCabinetService;
         this.csvFileService = csvFileService;
     }

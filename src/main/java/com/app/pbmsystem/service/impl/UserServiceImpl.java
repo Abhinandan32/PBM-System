@@ -2,7 +2,7 @@ package com.app.pbmsystem.service.impl;
 
 import com.app.pbmsystem.model.User;
 import com.app.pbmsystem.repository.UserRepository;
-import com.app.pbmsystem.service.IUserService;
+import com.app.pbmsystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -15,12 +15,12 @@ import java.util.Optional;
  * Created by dawidbranicki on 14.04.2018.
  */
 @Service
-public class UserService implements IUserService {
+public class UserServiceImpl implements UserService {
 
     private UserRepository userRepository;
 
     @Autowired
-    public UserService(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 

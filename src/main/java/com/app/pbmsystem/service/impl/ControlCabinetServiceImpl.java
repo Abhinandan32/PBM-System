@@ -4,7 +4,7 @@ import com.app.pbmsystem.dto.ControlCabinetDTO;
 import com.app.pbmsystem.mapper.ControlCabinetMapper;
 import com.app.pbmsystem.model.ControlCabinet;
 import com.app.pbmsystem.repository.ControlCabinetRepository;
-import com.app.pbmsystem.service.IControlCabinetService;
+import com.app.pbmsystem.service.ControlCabinetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,14 +17,14 @@ import java.util.stream.Collectors;
  */
 
 @Service
-public class ControlCabinetService implements IControlCabinetService {
+public class ControlCabinetServiceImpl implements ControlCabinetService {
 
     private ControlCabinetRepository controlCabinetRepository;
 
     private ControlCabinetMapper controlCabinetMapper;
 
     @Autowired
-    public ControlCabinetService(ControlCabinetRepository controlCabinetRepository, ControlCabinetMapper controlCabinetMapper) {
+    public ControlCabinetServiceImpl(ControlCabinetRepository controlCabinetRepository, ControlCabinetMapper controlCabinetMapper) {
         this.controlCabinetRepository = controlCabinetRepository;
         this.controlCabinetMapper = controlCabinetMapper;
     }

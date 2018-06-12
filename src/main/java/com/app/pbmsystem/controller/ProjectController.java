@@ -2,7 +2,7 @@ package com.app.pbmsystem.controller;
 
 import com.app.pbmsystem.dto.ProjectDTO;
 import com.app.pbmsystem.model.Project;
-import com.app.pbmsystem.service.IProjectService;
+import com.app.pbmsystem.service.ProjectService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Created by dawidbranicki on 14.04.2018.
@@ -22,10 +21,10 @@ import java.util.Optional;
 @Api(value = "PMB System", description = "All operation for projects", tags = "Project")
 public class ProjectController {
 
-    private IProjectService projectService;
+    private ProjectService projectService;
 
     @Autowired
-    public ProjectController(IProjectService projectService) {
+    public ProjectController(ProjectService projectService) {
         this.projectService = projectService;
     }
 

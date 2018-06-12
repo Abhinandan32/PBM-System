@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by dawidbranicki on 20.05.2018.
  */
-public interface IControlCabinetService {
+public interface ControlCabinetService {
 
     List<ControlCabinet> controlCabinets();
 

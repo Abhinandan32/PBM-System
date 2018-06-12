@@ -1,7 +1,7 @@
 package com.app.pbmsystem.controller;
 
 import com.app.pbmsystem.model.User;
-import com.app.pbmsystem.service.IUserService;
+import com.app.pbmsystem.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Created by dawidbranicki on 14.04.2018.
@@ -26,10 +25,10 @@ public class UserController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
 
-    private IUserService userService;
+    private UserService userService;
 
     @Autowired
-    public UserController(IUserService userService) {
+    public UserController(UserService userService) {
         this.userService = userService;
     }
 
