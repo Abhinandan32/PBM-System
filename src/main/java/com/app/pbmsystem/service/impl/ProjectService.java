@@ -53,6 +53,10 @@ public class ProjectService implements IProjectService {
 
     @Override
     public void deleteById(Long id) {
+        List<ControlCabinet> controlCabinets = controlCabinetRepository.findAll()
+                .stream().filter(c -> c.getProject_id().equals(id))
+                .collect(Collectors.toList());
+        controlCabinetRepository.deleteInBatch(controlCabinets);
         projectRepository.deleteById(id);
     }
 

@@ -53,9 +53,6 @@ public class ProjectController {
     @ApiOperation(value = "Add new project")
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public ResponseEntity<Project> addProject(@RequestBody Project project) {
-        if (!projectService.isExist(project.getId())) {
-            return new ResponseEntity<>(HttpStatus.CONFLICT);
-        }
         projectService.addProject(project);
         return new ResponseEntity<>(HttpStatus.OK);
     }
