@@ -26,7 +26,7 @@ import java.util.Collections;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private static final String LOGOUT_API_URL = "/rest/logout";
-    private static final String FRONT_APPLICATION_API = "http://localhost:4200"; //TODO tu trzeba będzie poźniej ustawić dokładny adres po wjesciu frontu na AWS
+    private static final String FRONT_APPLICATION_API = "https://elasticbeanstalk-eu-central-1-461990728105.s3.amazonaws.com"; //TODO tu trzeba będzie poźniej ustawić dokładny adres po wjesciu frontu na AWS
     private static final String[] AUTH_LIST = {
             "/rest/v2/api-docs",
             "/rest/configuration/ui",
