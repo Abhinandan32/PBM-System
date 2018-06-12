@@ -36,17 +36,18 @@ public class CsvFileService {
                     .withSeparator(';')
                     .build();
             List<ControlCabinet> controlCabinets = cabinetCsvToBean.parse();
-            controlCabinets.forEach(c -> {
-                c.setArchive(true);
-                c.setToValuation(false);
-                c.setNotUsedInModel(true);
-                c.setEstimatedTime((long) 0);
-                c.setValuationCost((long) 0);
-            });
+            controlCabinets.forEach(this::setDefaultVariables);
 
             controlCabinetRepository.saveAll(controlCabinets);
 
         }
+    }
+
+    private void setDefaultVariables(ControlCabinet controlCabinet) {
+        controlCabinet.setArchive(true);
+        controlCabinet.setToValuation(false);
+        controlCabinet.setEstimatedTime((long) 0);
+        controlCabinet.setValuationCost((long) 0);
     }
 
     private File convertMultipartFile(MultipartFile multipartFile) throws IOException {
